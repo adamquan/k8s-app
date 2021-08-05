@@ -1,0 +1,60 @@
+x-google-marketplace:
+  schemaVersion: v2
+
+  applicationApiVersion: v1beta1
+
+  publishedVersion: "$TAG"
+  publishedVersionMetadata:
+    releaseNote: >-
+      A regular update.
+    releaseTypes:
+      - Feature
+    recommended: false
+
+  images:
+    '':
+      properties:
+        elasticsearch.image.repo:
+          type: REPO_WITH_REGISTRY
+        elasticsearch.image.tag:
+          type: TAG
+    prometheus-to-sd:
+      properties:
+        metrics.image:
+          type: FULL
+    ubuntu16_04:
+      properties:
+        elasticsearch.initImage:
+          type: FULL
+
+properties:
+  name:
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:
+    type: string
+    x-google-marketplace:
+      type: NAMESPACE
+  elasticsearch.user:
+    type: string
+    title: Elastic User Name
+    description: User name to log into the elastic cluster
+    default: "adam"
+  elasticsearch.password:
+    type: string
+    title: Elastic User Password
+    description: Password for the elastic user to log into the elastic cluster
+    default: "changeme"
+  elasticsearch.host:
+    type: string
+    title: Elasticsearch Host URL
+    description: Elastic cluster Host URL
+    default: "https://c4d21a04327f4a5292f68a300b2463cf.us-central1.gcp.cloud.es.io:9243"
+
+required:
+- name
+- namespace
+- elasticsearch.user
+- elasticsearch.password
+- elasticsearch.host
