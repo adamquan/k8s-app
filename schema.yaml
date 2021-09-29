@@ -2,30 +2,14 @@ x-google-marketplace:
   schemaVersion: v2
 
   applicationApiVersion: v1beta1
-
-  publishedVersion: "$TAG"
+  # The published version is required and MUST match the tag
+  # of the deployer image
+  publishedVersion: '1.0'
   publishedVersionMetadata:
     releaseNote: >-
-      A regular update.
-    releaseTypes:
-      - Feature
-    recommended: false
-
-  images:
-    '':
-      properties:
-        elasticsearch.image.repo:
-          type: REPO_WITH_REGISTRY
-        elasticsearch.image.tag:
-          type: TAG
-    prometheus-to-sd:
-      properties:
-        metrics.image:
-          type: FULL
-    ubuntu16_04:
-      properties:
-        elasticsearch.initImage:
-          type: FULL
+      A first release.
+  # The images property will be filled in during part 2
+  images: {}
 
 properties:
   name:
@@ -36,25 +20,12 @@ properties:
     type: string
     x-google-marketplace:
       type: NAMESPACE
-  elasticsearch.user:
-    type: string
-    title: Elastic User Name
-    description: User name to log into the elastic cluster
-    default: "adam"
-  elasticsearch.password:
-    type: string
-    title: Elastic User Password
-    description: Password for the elastic user to log into the elastic cluster
-    default: "changeme"
-  elasticsearch.host:
-    type: string
-    title: Elasticsearch Host URL
-    description: Elastic cluster Host URL
-    default: "https://c4d21a04327f4a5292f68a300b2463cf.us-central1.gcp.cloud.es.io:9243"
+  replicas:
+    type: integer
+    title: Nginx Replica Count
+    description: The number of nginx replicas to deploy
 
 required:
 - name
 - namespace
-- elasticsearch.user
-- elasticsearch.password
-- elasticsearch.host
+- replicas
